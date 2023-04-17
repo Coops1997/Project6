@@ -5,14 +5,14 @@ const saucesCtrl = require('../controllers/sauces');
 router.get('/', saucesCtrl.getAllSauces);
 
 router.post('/', (req, res, next) => {
-  const thing = new Thing({
+  const sauce = new Sauce({
     title: req.body.title,
     description: req.body.description,
     imageUrl: req.body.imageUrl,
     price: req.body.price,
     userId: req.body.userId
   });
-  thing.save().then(
+  sauce.save().then(
     () => {
       res.status(201).json({
         message: 'Post saved successfully!'
@@ -31,8 +31,8 @@ router.get('/:id', (req, res, next) => {
   Sauce.findOne({
     _id: req.params.id
   }).then(
-    (thing) => {
-      res.status(200).json(thing);
+    (sauce) => {
+      res.status(200).json(sauce);
     }
   ).catch(
     (error) => {
@@ -52,7 +52,7 @@ router.put('/:id', (req, res, next) => {
     price: req.body.price,
     userId: req.body.userId
   });
-  Thing.updateOne({_id: req.params.id}, thing).then(
+  Sauces.updateOne({_id: req.params.id}, sauce).then(
     () => {
       res.status(201).json({
         message: 'Thing updated successfully!'
@@ -68,7 +68,7 @@ router.put('/:id', (req, res, next) => {
 });
 
 router.delete('/:id', (req, res, next) => {
-  Thing.deleteOne({_id: req.params.id}).then(
+  Sauces.deleteOne({_id: req.params.id}).then(
     () => {
       res.status(200).json({
         message: 'Deleted!'
@@ -85,9 +85,9 @@ router.delete('/:id', (req, res, next) => {
 
 router.get('/' +
   '', (req, res, next) => {
-  Thing.find().then(
-    (things) => {
-      res.status(200).json(things);
+  Sauce.find().then(
+    (sauce) => {
+      res.status(200).json(sauces);
     }
   ).catch(
     (error) => {
