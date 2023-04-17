@@ -1,18 +1,14 @@
-const express = require('express');
-const router = express.Router();
-const saucesCtrl = require('../controllers/sauces');
+const Sauce = require('../models/sauces');
 
-router.get('/', saucesCtrl.getAllSauces);
-
-router.post('/', (req, res, next) => {
-  const thing = new Thing({
+exports.createSauce = (req, res, next) => {
+  const sauce = new Sauce({
     title: req.body.title,
     description: req.body.description,
     imageUrl: req.body.imageUrl,
     price: req.body.price,
     userId: req.body.userId
   });
-  thing.save().then(
+  sauce.save().then(
     () => {
       res.status(201).json({
         message: 'Post saved successfully!'
@@ -25,10 +21,10 @@ router.post('/', (req, res, next) => {
       });
     }
   );
-});
+};
 
-router.get('/:id', (req, res, next) => {
-  Sauce.findOne({
+exports.getOneThing = (req, res, next) => {
+  Thing.findOne({
     _id: req.params.id
   }).then(
     (thing) => {
@@ -41,10 +37,10 @@ router.get('/:id', (req, res, next) => {
       });
     }
   );
-});
+};
 
-router.put('/:id', (req, res, next) => {
-  const thing = new Thing({
+exports.modifySauce = (req, res, next) => {
+  const sauce = new Sauce({
     _id: req.params.id,
     title: req.body.title,
     description: req.body.description,
@@ -52,10 +48,10 @@ router.put('/:id', (req, res, next) => {
     price: req.body.price,
     userId: req.body.userId
   });
-  Thing.updateOne({_id: req.params.id}, thing).then(
+  Sauce.updateOne({_id: req.params.id}, sauce).then(
     () => {
       res.status(201).json({
-        message: 'Thing updated successfully!'
+        message: 'Sauce updated successfully!'
       });
     }
   ).catch(
@@ -65,10 +61,10 @@ router.put('/:id', (req, res, next) => {
       });
     }
   );
-});
+};
 
-router.delete('/:id', (req, res, next) => {
-  Thing.deleteOne({_id: req.params.id}).then(
+exports.deleteSauce = (req, res, next) => {
+  Sauce.deleteOne({_id: req.params.id}).then(
     () => {
       res.status(200).json({
         message: 'Deleted!'
@@ -81,13 +77,12 @@ router.delete('/:id', (req, res, next) => {
       });
     }
   );
-});
+};
 
-router.get('/' +
-  '', (req, res, next) => {
-  Thing.find().then(
-    (things) => {
-      res.status(200).json(things);
+exports.getAllSauce = (req, res, next) => {
+  Sauce.find().then(
+    (sauces) => {
+      res.status(200).json(sauces);
     }
   ).catch(
     (error) => {
@@ -96,6 +91,4 @@ router.get('/' +
       });
     }
   );
-});
-
-module.exports = router;
+};
