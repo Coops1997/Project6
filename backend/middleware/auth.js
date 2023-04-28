@@ -1,34 +1,18 @@
-const jwt = require("jsonwebtoken");
-const express = require("express");
-const bcrypt = require("bcrypt");
+const jwt = require('jsonwebtoken');
 
-const router = express.Router();
-
-
-//on post //
-
-router.post("/", async (req, res) => {
-
-    const users =[{email:"", password:"",}]
-
-//get to user from datebase
-
-let user = users.find(u => u.email === req.body.email);
-if (!user) throw new Error ("Invalid email or password")
-})
-
-const valid = await bcrypt.compare(req, body, password, user.password);
-if (!valid) throw new Error ("Invalid email or password");
-
-const token = jwt.sign({
-    id:user._id,
-    roles: user.roles,
-}, "jwtPrivateKey", {expiresIn: "15m"});
-
-res.send({
-    okay: true,
-    token: token,
-});
-
-
-module.exports = router;
+module.exports = (req, res, next) => {
+  try {
+    const token = req.headers.authorization.split(' ')[1];
+    const decodedToken = jwt.verify(token, 'RANDOM_TOKEN_SECRET');
+    const userId = decodedToken.userId;
+    if (req.body.userId && req.body.userId !== userId) {
+      throw 'Invalid user ID';
+    } else {
+      next();
+    }
+  } catch {
+    res.status(401).json({
+      error: new Error('Invalid request!')
+    });
+  }
+};
