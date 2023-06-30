@@ -1,6 +1,8 @@
 const Sauce = require('../models/sauces');
 
 exports.createSauce = (req, res, next) => {
+  req.body.sauce = JSON.parse(req.body.sauce);
+  const url = req.protocol + '://' + req.get('host');
   const sauce = new Sauce({
     title: req.body.title,
     description: req.body.description,
