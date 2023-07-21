@@ -2,10 +2,12 @@
 // MONGODB connection: mongodb+srv://sam:<password>@cluster1.y8n1jzi.mongodb.net/?retryWrites=true&w=majority
 const express = require('express');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+
 const app = express();
 
 const userRoutes = require('./routes/user'); // add user route
-const sauceRoutes = require('./routes/sauces'); //add sauce route
+const saucesRoutes = require('./routes/sauces'); //add sauce route
 
 
 // Connect to mongodb
@@ -17,6 +19,8 @@ mongoose.connect('mongodb+srv://sam:OsGmURCmKJf0Kct0@cluster1.y8n1jzi.mongodb.ne
     console.log('Unable to connect to MongoDB Atlas!');
     console.error(error);
   });
+
+app.use(bodyParser.json());
 
 app.use(express.json());
 
