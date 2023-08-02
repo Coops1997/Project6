@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 const app = express();
 
 const userRoutes = require('./routes/user'); // add user route
-const saucesRoutes = require('./routes/sauces'); //add sauce route
+const sauceRoutes = require('./routes/sauce'); //add sauce route
 
 
 // Connect to mongodb
@@ -32,7 +32,7 @@ app.use((req, res, next) => {
   });
 
 app.use('/api/auth', userRoutes);
-app.use('/api/sauces', sauceRoutes);
+app.use('/api/sauce', sauceRoutes);
 
 app.use('', (req, res, next) => {
     res.end('Server Created!');
