@@ -31,5 +31,11 @@ app.use((req, res, next) => {
     next();
   });
 
+app.use('/api/auth', userRoutes);
+app.use('/api/sauces', sauceRoutes);
+
+app.use('', (req, res, next) => {
+    res.end('Server Created!');
+});
 
 module.exports = app; 
