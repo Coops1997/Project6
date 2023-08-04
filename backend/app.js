@@ -3,11 +3,12 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const path = require('path');
 
 const app = express();
 
 const userRoutes = require('./routes/user'); // add user route
-const saucesRoutes = require('./routes/sauces'); //add sauce route
+const sauceRoutes = require('./routes/sauce'); //add sauce route
 
 
 // Connect to mongodb
@@ -31,5 +32,12 @@ app.use((req, res, next) => {
     next();
   });
 
+app.use('/images', express.static(path.join(__dirname, 'images')));
+app.use('/api/auth', userRoutes);
+app.use('/api/sauce', sauceRoutes);
+
+app.use('', (req, res, next) => {
+    res.end('Server Created!');
+});
 
 module.exports = app; 
