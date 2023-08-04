@@ -32,18 +32,8 @@ app.use((req, res, next) => {
     next();
   });
 
-<<<<<<< HEAD
-app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use('/api/auth', userRoutes);
 app.use('/api/sauce', sauceRoutes);
-=======
-app.use('/api/auth', userRoutes);
-app.use('/api/sauce', sauceRoutes);
-
-app.use('', (req, res, next) => {
-    res.end('Server Created!');
-});
->>>>>>> 85478041859aec86867d2ca073d626e33e504d96
 
 app.use('', (req, res, next) => {
     res.end('Server Created!');
