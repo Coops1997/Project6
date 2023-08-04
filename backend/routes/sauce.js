@@ -13,4 +13,8 @@ router.delete('/:id', auth, sauceCtrl.deleteSauce);
 router.post('/:id/like', auth, sauceCtrl.likes);
 
 
+<<<<<<< HEAD
 module.exports = router; 
+=======
+module.exports = router; 
+>>>>>>> 85478041859aec86867d2ca073d626e33e504d96

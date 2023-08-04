@@ -14,4 +14,8 @@ const sauceSchema = mongoose.Schema({
     usersDisliked: {type: Array, required: false },
 });
 
+<<<<<<< HEAD
 module.exports = mongoose.model('Sauce', sauceSchema);
+=======
+module.exports = mongoose.model('Sauce', sauceSchema);
+>>>>>>> 85478041859aec86867d2ca073d626e33e504d96
