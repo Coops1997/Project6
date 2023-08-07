@@ -1,5 +1,12 @@
 const Sauce = require('../models/sauce');
-const fs = require('fs');
+const fs = require('fs'); 
+
+const { exec } = require('child_process');
+
+const { retry } = require('rxjs');
+
+const { isAsyncFunction } = require('util/types');
+
 
 function addLike(res, sauceId, userId) {
     Sauce.updateOne(
